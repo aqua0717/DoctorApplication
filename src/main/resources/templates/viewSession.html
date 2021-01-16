@@ -1,0 +1,44 @@
+<!-- Doctor Preview Sessions : /viewSession -->
+
+<!-- TODO: will probably will need to re-structure the way the folders and endpoints are set up -->
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Preview Sessions</title>
+    <th:block th:include="../fragments/header.html"></th:block>
+</head>
+<body>
+
+<h1>Patient Sessions</h1>
+<div th:if="sessions">
+
+    <table>
+        <tr>
+            <td>Room ID</td>
+            <td>Patient Name</td>
+            <td>Date</td>
+            <td>Time</td>
+            <td>Duration</td>
+            <td>Doctor Status</td>
+            <td>Patient Status</td>
+        </tr>
+        <!-- Given that in the backend, a list of Sessions with these fields are passed
+        into the model of the request mapping. Can adjust with new published code. -->
+        <th:block th:each="sess : ${sessions}">
+            <tr>
+                <td th:text="${sess.sessionId}">...</td>
+                <td th:text="${sess.patientName}">...</td>
+                <td th:text="${sess.date}">...</td>
+                <td th:text="${sess.time}">...</td>
+                <td th:text="${sess.duration}">...</td>
+                <td th:if="${sess.doctorStatus}">Connected</td>
+                <td th:unless="${sess.doctorStatus}">Not Connected</td>
+                <td th:if="${sess.patientStatus}">Connected</td>
+                <td th:unless="${sess.patientStatus}"> Not Connected</td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>
